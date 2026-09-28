@@ -4,12 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Buscador de CEP</title>
+
+    <style>
+        body {
+            /* faz o budy*/
+        }
+    </style>
 </head>
 
 <body>
     <h1>Buscador de CEP</h1>
 
-    <input type="text" id="^campoCep" placeholder="Digite o campoCep">
+    <input type="text" id="campoCep" placeholder="Digite o campoCep">
     <button id="botaoBuscar">Buscar</button>
     <div id="resultado"></div>
 </body>
@@ -18,12 +24,38 @@
 
 <script>
     // Acha o campo de digitar pelo id e guarda na constante
-    const campoCep = document.getElementById('campoCEP');
+    const campoCep = document.getElementById('campoCep');
 
     // Acha o botão pelo id e guarda na constante
-    const botaoBucar = document.getElementById('botaoBuscar');
+    const botaoBuscar = document.getElementById('botaoBuscar');
 
     // Acha a caixa de resultado pelo id e guarda na constante
-    cpnst resultado = document.getElementById('resultado');
+    const resultado = document.getElementById('resultado');
 
+    //Gruda um ouvinte no botao: quando houver ~click~, roda a funcao
+    botaoBuscar.addEventListener('click', async function () {
+        const cep = campoCep.value;
+
+        if (cep == '') {
+            resultado.textContent = 'Por favor, digite um CEP';
+            return;
+        }
+        //Pedir  (Fetch) Monta a URL com o CEP e dispara o pedido
+        const resposta = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+
+        //Desempacotar (.json) abre o envelope e traduuz o conteudo
+        const dados = await resposta.json();
+
+        if (dados.erro) {
+            resultado.textContent = 'CEP nao encontrado';
+            return;
+        }
+
+        // ESCREVER NA TELA: monta o endereço e mostra na caixa de resultado
+        resultado.innerHTML = `
+            <p><strong>Rua:</strong> ${dados.logradouro}</p>
+            <p><strong>Bairro:</strong> ${dados.bairro}</p>
+            <p><strong>Cidade:</strong> ${dados.localidade} - ${dados.uf}</p>
+        `;
+    });
 </script>
