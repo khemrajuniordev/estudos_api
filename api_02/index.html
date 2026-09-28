@@ -7,17 +7,83 @@
 
     <style>
         body {
-            /* faz o budy*/
+            /* faz o body virar um container flexivel*/
+            display: flex;
+            /* Centraliza os filhos na horizontal */
+            justify-content: center;
+            /* Centraliza os filhos na vertical */
+            align-items: center;
+            /* Faz o body ocupar a altura inteira da tela */
+            min-height: 100vh;
+            /* Tira a margem padrão que o navegador coloca */
+            margin: 0;
+            /* Cor de fundo da página (cinza bem claro) */
+            background-color: #f0f2f5;
+            /* Fonte mais moderna que a padrão */
+            font-family: Arial, sans-serif;
+        }
+
+        #card {
+            /* Vira container flex em COLUNA (empilha os filhos) */
+            display: flex;
+            flex-direction: column;
+            /* Espaçamento entre os filhos empilhados */
+            gap: 12px;
+            /* Fundo branco do card */
+            background-color: #ffffff;
+            /* Espaço interno (entre a borda do card e o conteúdo) */
+            padding: 32px;
+            /* Cantos arredondados */
+            border-radius: 12px;
+            /* Sombra suave pra dar profundidade */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            /* Largura fixa do card */
+            width: 320px;
+        }
+
+        #campoCep {
+            /* Espaço interno pra digitação não ficar colada */
+            padding: 12px;
+            /* Borda suave */
+            border: 1px solid #ccc;
+            /* Cantos levemente arredondados */
+            border-radius: 8px;
+            /* Tamanho da fonte de digitação */
+            font-size: 16px;
+        }
+
+        #botaoBuscar {
+            /* Espaço interno do botão */
+            padding: 12px;
+            /* Cor de fundo azul */
+            background-color: #1877f2;
+            /* Cor do texto (branco) */
+            color: #ffffff;
+            /* Remove a borda padrão */
+            border: none;
+            /* Cantos arredondados */
+            border-radius: 8px;
+            /* Tamanho da fonte */
+            font-size: 16px;
+            /* Deixa em negrito */
+            font-weight: bold;
+            /* Muda o cursor pra "mãozinha" ao passar por cima */
+            cursor: pointer;
         }
     </style>
 </head>
 
 <body>
-    <h1>Buscador de CEP</h1>
 
-    <input type="text" id="campoCep" placeholder="Digite o campoCep">
-    <button id="botaoBuscar">Buscar</button>
-    <div id="resultado"></div>
+    <body>
+        <div id="card">
+            <h1>Buscador de CEP</h1>
+
+            <input type="text" id="campoCep" placeholder="Digite o CEP">
+            <button id="botaoBuscar">Buscar</button>
+            <div id="resultado"></div>
+        </div>
+    </body>
 </body>
 
 </html>
